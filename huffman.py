@@ -35,6 +35,18 @@ def encode(text):
         stringEncoded+=codeDict[i]
     return stringEncoded
 
+def decode(text):
+    stringDecoded = ''
+    current_code = ''
+    for char in text:
+        current_code += char
+        for char, code in codeDict.items():
+            if code == current_code:
+                stringDecoded += char
+                current_code = ''
+                break
+    print("Decode",stringDecoded)
+
 def spaceSaving(text):
     print('Uncompressed size:',len(text)*8)
     print('Compressed size:',len(encode(text)))
@@ -52,4 +64,6 @@ def huffman():
     frequencyTree = huffman_tree(frequency)
     dfs(frequencyTree)
     spaceSaving(string)
+    print("Encode",encode(string))
+    decode(encode(string))
 huffman()
